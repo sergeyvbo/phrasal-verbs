@@ -1,0 +1,24 @@
+@phrasal_verbs_HostAddress = http://localhost:5033
+
+GET {{phrasal_verbs_HostAddress}}/random/
+Accept: application/json
+
+###
+
+POST {{phrasal_verbs_HostAddress}}/check
+Content-Type: application/json
+
+{
+  "verb": "abide by",
+  "selectedMeaning": "To respect or obey a decision, a law or a rule"
+}
+
+###
+
+POST {{phrasal_verbs_HostAddress}}/check
+Content-Type: application/json
+
+{
+  "verb": "tell off",
+  "selectedMeaning": "To respect or obey a decision, a law or a rule"
+}
