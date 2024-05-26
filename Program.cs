@@ -8,7 +8,11 @@ builder.Services.AddSingleton<PhrasalVerbService>();
 
 builder.Services.AddCors(c =>
         {
-            c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
+            c.AddPolicy("AllowOrigin", options => {
+                options.AllowAnyOrigin();
+                options.AllowAnyHeader();
+                options.AllowAnyMethod();
+            });
         });
 
 var hostUrl = builder.Configuration["WebHost:Url"];
@@ -29,5 +33,5 @@ app.MapPost("/check", (CheckMeaningRequest request, PhrasalVerbService service) 
     return Results.Ok(new { isCorrect, CorrectMeaning = phrasalVerb?.Meaning });
 });
 
-app.UseCors("AllowReactApp");
+app.UseCors("AllowOrigin");
 app.Run();
