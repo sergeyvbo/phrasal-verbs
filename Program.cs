@@ -29,8 +29,5 @@ app.MapPost("/check", (CheckMeaningRequest request, PhrasalVerbService service) 
     return Results.Ok(new { isCorrect, CorrectMeaning = phrasalVerb?.Meaning });
 });
 
-app.UseCors(options =>
-        {
-            options.AllowAnyOrigin();
-        });
+app.UseCors("AllowReactApp");
 app.Run();
