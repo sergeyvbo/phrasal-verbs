@@ -6,6 +6,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddSingleton<PhrasalVerbService>();
 
+var hostUrl = builder.Configuration["WebHost:Url"];
+var port = builder.Configuration["WebHost:Port"];
+builder.WebHost.UseUrls($"{hostUrl}:{port}");
 var app = builder.Build();
 
 app.MapGet("/random", (PhrasalVerbService service) =>
