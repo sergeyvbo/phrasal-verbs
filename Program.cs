@@ -6,6 +6,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddSingleton<PhrasalVerbService>();
 
+builder.Services.AddCors(c =>
+        {
+            c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
+        });
+
 var hostUrl = builder.Configuration["WebHost:Url"];
 var port = builder.Configuration["WebHost:Port"];
 builder.WebHost.UseUrls($"{hostUrl}:{port}");
@@ -24,4 +29,8 @@ app.MapPost("/check", (CheckMeaningRequest request, PhrasalVerbService service) 
     return Results.Ok(new { isCorrect, CorrectMeaning = phrasalVerb?.Meaning });
 });
 
+app.UseCors(options =>
+        {
+            options.AllowAnyOrigin();
+        });
 app.Run();
