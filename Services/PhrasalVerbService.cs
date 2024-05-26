@@ -38,6 +38,9 @@ public class PhrasalVerbService
     public PhrasalVerb CheckMeaning(string verb, string selectedMeaning)
     {
         var phrasalVerb = _phrasalVerbs.FirstOrDefault(pv => pv.Verb == verb);
+        if (phrasalVerb is null) {
+            throw new ArgumentException("Verb not found");
+        }
         return phrasalVerb;
     }
 }
